@@ -1,0 +1,26 @@
+import discord
+import asyncio
+
+intents = discord.Intents.default()
+intents.typing = False
+intents.presences = False
+
+# Remplacez 'YOUR_BOT_TOKEN' par votre propre jeton de bot
+TOKEN = 'MTE0MDU3ODQ3NDA1MDk5MDE1MQ.GDNCO1.u6NJ2ZMockGOzDffRL5kpx6OEkYLJpHYZb0f0g'
+
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print(f'Logged in as {client.user.name} ({client.user.id})')
+
+    # Définir l'ID du canal où les pings seront envoyés
+    channel_id = 1139920300700602478
+
+    # Boucle pour envoyer 5 pings en 1 minute
+    for _ in range(5):
+        await asyncio.sleep(12)  # Attendre 12 secondes
+        channel = client.get_channel(channel_id)
+        await channel.send("@everyone Ping!")
+
+client.run(TOKEN)
